@@ -17,10 +17,8 @@ namespace SaldoFacil.API.Entities
 
         public StatusPedido StatusPedido { get; set; }
 
-        public DateTime DataInicio { get; set; }
-
-        public DateTime DataFinal { get; set; }
-
         public float Valor { get; set; }
+
+        public ICollection<EtapaEvento> Eventos { get; set; }
     }
 }

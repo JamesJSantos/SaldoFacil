@@ -15,16 +15,10 @@ namespace SaldoFacil.API.Entities
 
         public int MotivoBloqueioId { get; set; }
 
-        public int StatusPedidoId { get; set; }
-
         public MotivoBloqueio MotivoBloqueio { get; set; }
 
-        public StatusPedido StatusPedido { get; set; }
-
-        public DateTime DataInicio { get; set; }
-
-        public DateTime DataFim { get; set; }
-
         public float Tarifa { get; set; }
+
+        public ICollection<EtapaEvento> Eventos { get; set; }
     }
 }

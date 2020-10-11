@@ -32,6 +32,10 @@ namespace SaldoFacil.API
             services.AddControllers();
             services.AddDbContext<MainContext>(options => options.UseMySql(connection));
             services.AddTransient<UsuarioService>();
+            services.AddTransient<MotivoBloqueioService>();
+            services.AddTransient<CartaoTransporteService>();
+            services.AddTransient<StatusPedidoService>();
+            services.AddTransient<TipoCartaoService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

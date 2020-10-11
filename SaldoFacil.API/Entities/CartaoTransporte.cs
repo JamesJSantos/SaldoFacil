@@ -8,7 +8,7 @@ namespace SaldoFacil.API.Entities
 {
     public class CartaoTransporte : BaseEntity
     {
-        //public int UsuarioId { get; set; }
+        public int UsuarioId { get; set; }
 
         public Usuario Usuario { get; set; }
 

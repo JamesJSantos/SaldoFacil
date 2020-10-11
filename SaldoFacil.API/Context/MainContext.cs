@@ -43,5 +43,7 @@ namespace SaldoFacil.API.Context
         public DbSet<StatusPedido> StatusPedido { get; set; }
 
         public DbSet<TipoCartao> TipoCartao { get; set; }
+
+        public DbSet<EtapaEvento> EtapaEvento { get; set; }
     }
 }

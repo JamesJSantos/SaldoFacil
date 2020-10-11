@@ -18,16 +18,18 @@ namespace SaldoFacil.API.Services
             _context = context;
         }
 
-        public async Task<List<CartaoTransporteViewModel>> GetById(int usuarioId)
+        public async Task<List<CartaoTransporteViewModel>> GetByUsuarioId(int usuarioId)
         {
             var list = new List<CartaoTransporteViewModel>();
 
             try
             {
-                var cartoes = await _context.CartaoTransporte.Where(c => c.Usuario.Id == usuarioId).ToListAsync();
+                var cartoes = await _context.CartaoTransporte.Where(c => c.Usuario.Id == usuarioId && c.Status).ToListAsync();
 
                 list = cartoes.Select(x => new CartaoTransporteViewModel
                 {
+                    Id = x.Id,
+                    UsuarioId = x.UsuarioId,
                     Numero = x.Numero,
                     Saldo = x.Saldo,
                     Tarifa = x.Tarifa,
@@ -41,18 +43,24 @@ namespace SaldoFacil.API.Services
             return list;
         }
 
-        public async Task Criar(CartaoTransporteViewModel cartao)
+        public async Task Adicionar(CartaoTransporteViewModel cartao)
         {
             try
             {
                 CartaoTransporte novoCartao = new CartaoTransporte
                 {
+                    UsuarioId = cartao.UsuarioId,
                     Numero = cartao.Numero,
                     Saldo = cartao.Saldo,
                     Tarifa = cartao.Tarifa,
                     TipoCartaoId = cartao.TipoCartaoId,
-                    Status = true
+                    Status = true,
                 };
+
+                if (_context.CartaoTransporte.Any(x => x.Numero == cartao.Numero))
+                {
+                    throw new Exception("Cartão Transporte já cadastrado.");
+                }
 
                 await _context.CartaoTransporte.AddAsync(novoCartao);
                 await _context.SaveChangesAsync();
@@ -78,7 +86,7 @@ namespace SaldoFacil.API.Services
             }
         }
 
-        public async Task SolicitaBloqueio (SolicitacaoBloqueioViewModel solicitacao)
+        public async Task SolicitaBloqueio(SolicitacaoBloqueioViewModel solicitacao)
         {
             try
             {
@@ -86,7 +94,7 @@ namespace SaldoFacil.API.Services
                 {
                     CartaoTransporteId = solicitacao.CartaoTransporteId,
                     MotivoBloqueioId = solicitacao.MotivoBloqueioId,
-                    StatusPedidoId = solicitacao.StatusPedidoId
+
                 };
 
                 await _context.SolicitacaoBloqueio.AddAsync(novaSolicitacao);
@@ -112,7 +120,8 @@ namespace SaldoFacil.API.Services
                 {
                     MotivoBloqueioDescricao = x.MotivoBloqueio.DescricaoMotivo,
                     NumeroCartaoTransporte = x.CartaoTransporte.Numero,
-                    StatusPedidoDescricao = x.StatusPedido.DescricaoStatus,
+                    StatusPedidoDescricao = x.Eventos.Select(e => e.StatusPedido.DescricaoStatus).Last(),
+
                     //DataInicio = x.
                 }).ToList();
 

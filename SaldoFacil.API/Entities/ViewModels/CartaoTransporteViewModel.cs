@@ -8,9 +8,10 @@ namespace SaldoFacil.API.Entities.ViewModels
     public class CartaoTransporteViewModel
     {
         public int Id { get; set; }
-        public int TipoCartaoId { get; set; }
 
-        public TipoCartao TipoCartao { get; set; }
+        public int UsuarioId { get; set; }
+
+        public int TipoCartaoId { get; set; }
 
         public string Numero { get; set; }
 
