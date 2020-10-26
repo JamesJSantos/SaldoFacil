@@ -38,13 +38,5 @@ namespace SaldoFacil.API.Controllers
             await _service.Adicionar(request);
             return Ok();
         }
-
-        //[HttpPut]
-        //[Route("edit")]
-        //public async Task<IActionResult> Edit([FromBody] UsuarioViewModel request)
-        //{
-        //    await _service.Editar(request);
-        //    return Ok();
-        //}
     }
 }

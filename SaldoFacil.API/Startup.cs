@@ -36,6 +36,7 @@ namespace SaldoFacil.API
             services.AddTransient<CartaoTransporteService>();
             services.AddTransient<StatusPedidoService>();
             services.AddTransient<TipoCartaoService>();
+            services.AddTransient<BloqueioCartaoService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

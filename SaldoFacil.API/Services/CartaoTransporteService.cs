@@ -84,54 +84,6 @@ namespace SaldoFacil.API.Services
 
                 throw ex;
             }
-        }
-
-        public async Task SolicitaBloqueio(SolicitacaoBloqueioViewModel solicitacao)
-        {
-            try
-            {
-                SolicitacaoBloqueio novaSolicitacao = new SolicitacaoBloqueio
-                {
-                    CartaoTransporteId = solicitacao.CartaoTransporteId,
-                    MotivoBloqueioId = solicitacao.MotivoBloqueioId,
-
-                };
-
-                await _context.SolicitacaoBloqueio.AddAsync(novaSolicitacao);
-                await _context.SaveChangesAsync();
-
-            }
-            catch (Exception ex)
-            {
-
-                throw ex;
-            }
-        }
-
-        public async Task<List<SolicitacaoBloqueioViewModel>> GetSolicitacaoBloqueio(int cartaoId)
-        {
-            var solicitacaoBloqueio = new List<SolicitacaoBloqueioViewModel>();
-
-            try
-            {
-                var lista = await _context.SolicitacaoBloqueio.Include(w => w.MotivoBloqueio).Where(s => s.CartaoTransporteId == cartaoId).ToListAsync();
-
-                solicitacaoBloqueio = lista.Select(x => new SolicitacaoBloqueioViewModel
-                {
-                    MotivoBloqueioDescricao = x.MotivoBloqueio.DescricaoMotivo,
-                    NumeroCartaoTransporte = x.CartaoTransporte.Numero,
-                    StatusPedidoDescricao = x.Eventos.Select(e => e.StatusPedido.DescricaoStatus).Last(),
-
-                    //DataInicio = x.
-                }).ToList();
-
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-
-            return solicitacaoBloqueio;
-        }
+        }       
     }
 }

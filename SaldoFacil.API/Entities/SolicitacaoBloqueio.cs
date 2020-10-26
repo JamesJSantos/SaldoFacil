@@ -17,8 +17,6 @@ namespace SaldoFacil.API.Entities
 
         public MotivoBloqueio MotivoBloqueio { get; set; }
 
-        public float Tarifa { get; set; }
-
         public ICollection<EtapaEvento> Eventos { get; set; }
     }
 }

@@ -13,6 +13,8 @@ namespace SaldoFacil.API.Entities.ViewModels
 
         public int CartaoTransporteId { get; set; }
 
+        public int UsuarioId { get; set; }
+
         public int MotivoBloqueioId { get; set; }
 
         public string MotivoBloqueioDescricao { get; set; }
@@ -24,5 +26,7 @@ namespace SaldoFacil.API.Entities.ViewModels
         public DateTime DataInicio { get; set; }
 
         public DateTime DataConclusao { get; set; }
+
+        public List<EtapaEvento> Eventos { get; set; }
     }
 }
